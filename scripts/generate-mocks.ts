@@ -11,6 +11,15 @@ assert(fs.statSync(configFile));
 
 const tsConfig = JSON.parse(fs.readFileSync(configFile).toString());
 
+// The following runs two parses of ttsc with two different transformers. First,
+// the type checker is used to expand globally declared variables from
+// `globalThis` and the output is passed into `ts-auto-mock` to generate the
+// runtime mocks.
+//
+// Hopefully, sometime in the future, this can be simplified by chaining
+// transformers. But as of this writing, there's no TypeScript API to refresh
+// the type checker state in-between custom transformers.
+
 const baseCompilerOptions = tsConfig.compilerOptions || {};
 const environmentConfig = {
   ...tsConfig,
