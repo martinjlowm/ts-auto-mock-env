@@ -4,11 +4,11 @@
   "author": "martinjlowm <martin@martinjlowm.dk>",
   "license": "MIT",
   "bin": {
-    "generate-mocks": "./bin/generate-mocks.js"
+    "generate-mocks": "./dist/scripts/generate-mocks.js"
   },
-  "type": "module",
   "scripts": {
-    "test": "yarn generate-mocks test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null"
+    "test": "yarn generate-mocks test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null",
+    "postinstall": "tsc --outDir dist"
   },
   "devDependencies": {
     "@types/node": "^14.0.13",

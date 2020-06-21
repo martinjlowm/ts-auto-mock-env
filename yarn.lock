@@ -1307,7 +1307,7 @@ resolve@^1.9.0:
     typescript: ^3.9.5
     typescript-language-server: ^0.4.0
   bin:
-    generate-mocks: ./bin/generate-mocks.js
+    generate-mocks: ./dist/scripts/generate-mocks.js
   languageName: unknown
   linkType: soft
 

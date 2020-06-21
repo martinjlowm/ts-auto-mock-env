@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "downlevelIteration": true,
     "esModuleInterop": true,
-    "noEmit": true,
+    "noEmit": false,
     "paths": {
       "@/*": ["src/*"],
       "$/*": ["test/*"]
@@ -12,5 +12,6 @@
     "strict": true,
     "strictNullChecks": true,
     "types": ["node"]
-  }
+  },
+  "include": ["scripts", "transformers"]
 }

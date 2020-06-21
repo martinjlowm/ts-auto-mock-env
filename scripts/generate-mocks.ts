@@ -49,7 +49,7 @@ fs.writeFileSync(temporaryEnvironmentConfigFile, JSON.stringify({
     plugins: [
       ...basePlugins,
       {
-        transform: path.resolve(__dirname, '..', 'transformers', 'mock-generator.ts'),
+        transform: path.resolve(__dirname, '..', 'transformers', 'mock-generator.js'),
       },
     ],
   },
