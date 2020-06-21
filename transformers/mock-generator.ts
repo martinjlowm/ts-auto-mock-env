@@ -1,10 +1,16 @@
-import path from 'path';
+import assert = require('assert');
+import path = require('path');
 
-import ts from 'typescript';
+import ts = require('typescript');
 
 const visitor: (program: ts.Program) => ts.Visitor = (program) => {
   const checker = program.getTypeChecker();
-  const declarationsDirectory = path.join(program.getCurrentDirectory(), 'declarations');
+
+  const { types = [], configFilePath } = program.getCompilerOptions();
+
+  assert(typeof configFilePath === 'string', '! Expected configFilePath to be a string.');
+
+  const typePaths = types.map((t) => path.resolve(path.dirname(configFilePath), t));
 
   const createMock = ts.createIdentifier('createMock');
   const importClause = ts.createImportDeclaration(
@@ -38,20 +44,22 @@ const visitor: (program: ts.Program) => ts.Visitor = (program) => {
 
     const globalThisType = checker.getTypeAtLocation(identifier);
 
-    const declarations = checker.getPropertiesOfType(globalThisType)
+    const declarationNames = checker.getPropertiesOfType(globalThisType)
       .map((property) => property.valueDeclaration)
       .filter((declaration) => {
-        return declaration?.getSourceFile().fileName.startsWith(declarationsDirectory);
+        return typePaths.some((path) => declaration?.getSourceFile().fileName.startsWith(path));
       })
-      .filter((declaration): declaration is ts.NamedDeclaration => !!(declaration as ts.NamedDeclaration).name);
+      .filter((d): d is ts.FunctionLike | ts.VariableDeclaration  => ts.isFunctionLike(d) || ts.isVariableDeclaration(d))
+      .map((d) => d.name)
+      .filter((name): name is ts.Identifier => !!name && ts.isIdentifier(name));
 
     return [
       importClause,
-      ...declarations.map((declaration) => {
+      ...declarationNames.map((name) => {
         return ts.createExpressionStatement(
           ts.createAssignment(
-            ts.createPropertyAccess(ts.createIdentifier(identifier.text), declaration.name),
-            ts.createCall(createMock, [ts.createTypeQueryNode(declaration.name)], []),
+            ts.createPropertyAccess(ts.createIdentifier(identifier.text), name),
+            ts.createCall(createMock, [ts.createTypeQueryNode(name)], []),
           ),
         );
       })
@@ -59,19 +67,26 @@ const visitor: (program: ts.Program) => ts.Visitor = (program) => {
   };
 }
 
-function visitNodeAndChildren<T extends ts.Node>(node: T, context: ts.TransformationContext, visitor: ts.Transformer<T>): T {
-  return ts.visitEachChild(visitor(node), (childNode) => visitNodeAndChildren(childNode, context, visitor), context);
+function visitNodeAndChildren(node: ts.Node, context: ts.TransformationContext, visitor: ts.Visitor): ts.Node | ts.Node[] | undefined {
+  const visitedNode = visitor(node);
+
+  if (!visitedNode) {
+    return;
+  }
+
+  const evaluatedNodes = Array.isArray(visitedNode) ? visitedNode : [visitedNode];
+
+  return evaluatedNodes.map((n) => {
+    return ts.visitEachChild(n, (childNode) => visitNodeAndChildren(childNode, context, visitor), context);
+  });
 }
 
 const transformer: (program: ts.Program) => ts.TransformerFactory<ts.SourceFile> = (program) => {
-  const printer = ts.createPrinter();
   const visitNode = visitor(program);
-  return {
-    before: (context) => {
-      return (file) => {
-        return visitNodeAndChildren(file, context, visitNode as ts.Transformer<ts.SourceFile>);
-      };
-    },
+  return (context) => {
+    return (file) => {
+      return ts.visitNode(file, (node) => visitNodeAndChildren(node, context, visitNode));
+    };
   };
 };
 
