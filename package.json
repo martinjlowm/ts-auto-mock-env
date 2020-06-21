@@ -1,14 +1,18 @@
 {
   "name": "ts-auto-mock-env",
   "version": "1.0.0",
-  "author": "martinjlowm",
+  "author": "martinjlowm <martin@martinjlowm.dk>",
   "license": "MIT",
   "bin": {
     "generate-mocks": "./bin/generate-mocks.js"
   },
+  "scripts": {
+    "test": "yarn generate-mocks test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null"
+  },
   "devDependencies": {
     "@types/node": "^14.0.13",
     "eslint": "^7.3.0",
+    "ts-auto-mock": "^2.2.8",
     "typescript": "^3.9.5",
     "typescript-language-server": "^0.4.0"
   },
