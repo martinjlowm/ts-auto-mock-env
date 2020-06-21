@@ -18,6 +18,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 'Install dependencies'
+        run: |
+          yarn
+
       - name: 'Type check'
         run: |
           yarn tsc
