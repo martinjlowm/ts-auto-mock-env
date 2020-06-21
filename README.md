@@ -1,5 +1,7 @@
 # Environment mocking with TS auto mock
 
+![Continuous Integration](https://github.com/martinjlowm/ts-auto-mock-env/workflows/Continuous%20Integration/badge.svg)
+
 ## Installation
 
 - Yarn:
