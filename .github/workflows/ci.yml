@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on: 'push'
+
+jobs:
+  ci:
+    name: 'Build, lint and type check'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js 14.x LTS
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+          registry-url: https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Type check'
+        run: |
+          yarn tsc
+
+      - name: 'Assert generated environment (global) mocks'
+        run: |
+          yarn generate-mocks test/mocks/tsconfig.json
