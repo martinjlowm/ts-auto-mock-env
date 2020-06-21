@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "yarn generate-mocks test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null",
-    "postinstall": "tsc --outDir dist && find ."
+    "postinstall": "tsc --outDir dist"
   },
   "devDependencies": {
     "eslint": "^7.3.0",
