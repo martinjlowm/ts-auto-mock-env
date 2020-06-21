@@ -10,4 +10,4 @@
 
 # Bare JS files, except for executables
 *.js
-!bin/*.js
+!dist/**/*.js

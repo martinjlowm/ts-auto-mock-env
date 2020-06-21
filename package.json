@@ -8,17 +8,23 @@
   },
   "scripts": {
     "test": "yarn generate-mocks test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null",
-    "postinstall": "tsc --outDir dist"
+    "build": "tsc --outDir dist"
   },
   "devDependencies": {
+    "@types/node": "^14.0.13",
     "eslint": "^7.3.0",
+    "husky": "^4.2.5",
     "ts-auto-mock": "^2.2.8",
+    "ts-node": "^8.10.2",
+    "ttypescript": "^1.5.10",
     "typescript-language-server": "^0.4.0"
   },
   "dependencies": {
-    "@types/node": "^14.0.13",
-    "ts-node": "^8.10.2",
-    "ttypescript": "^1.5.10",
     "typescript": "^3.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn build && git add dist"
+    }
   }
 }
