@@ -2,6 +2,14 @@
 
 ![Continuous Integration](https://github.com/martinjlowm/ts-auto-mock-env/workflows/Continuous%20Integration/badge.svg)
 
+This project supplies an executable script to generate runtime mocks (powered by
+[`ts-auto-mock`](https://github.com/Typescript-TDD/ts-auto-mock)) from
+TypeScript declarations as supplied from a `tsconfig.json` using the `types`
+option. This project may be used by,
+
+1. package maintainers to supply pre-generated mocks for a release,
+2. or an end-user to create mocks on-demand.
+
 ## Installation
 
 - Yarn:
