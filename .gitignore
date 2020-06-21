@@ -7,3 +7,7 @@
 
 # typescript-language-server
 .log
+
+# Bare JS files, except for executables
+*.js
+!bin/*.js
