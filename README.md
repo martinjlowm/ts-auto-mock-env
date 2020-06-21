@@ -68,6 +68,6 @@ specific mocks yourself and mutate the property on `globalThis`, i.e.:
 
 Finally, you need to have `ts-auto-mock` installed to serve as a runtime for
 your tests. Then, you may use `import` or `require` wherever you'd like, as long
-as it's before your tests are initiated. For example, jest provides a config
+as it's before your tests are initiated. For example, Jest provides a config
 file which you can put these into. Another way is to add a require flag
 `-r <path-to-the-tsconfig-directory>` to the Node.js process.
