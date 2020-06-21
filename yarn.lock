@@ -814,6 +814,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-parse@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "path-parse@npm:1.0.6"
+  checksum: 2eee4b93fb3ae13600e3fca18390d9933bbbcf725a624f6b8df020d87515a74872ff6c58072190d6dc75a5584a683dc6ae5c385ad4e4f4efb6e66af040d56c67
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -846,6 +853,24 @@ __metadata:
   version: 4.0.0
   resolution: "resolve-from@npm:4.0.0"
   checksum: 87a4357c0c1c2d165012ec04a3b2aa58931c0c0be257890806760b627bad36c9bceb6f9b2a3726f8570c67f2c9ff3ecc9507fe65cc3ad8d45cdab015245c649f
+  languageName: node
+  linkType: hard
+
+resolve@^1.9.0:
+  version: 1.17.0
+  resolution: "resolve@npm:1.17.0"
+  dependencies:
+    path-parse: ^1.0.6
+  checksum: 5e3cdb8cf68c20b0c5edeb6505e7fab20c6776af0cae4b978836e557420aef7bb50acd25339bbb143b7f80533aa1988c7e827a0061aee9c237926a7d2c41f8d0
+  languageName: node
+  linkType: hard
+
+"resolve@patch:resolve@^1.9.0#builtin<compat/resolve>":
+  version: 1.17.0
+  resolution: "resolve@patch:resolve@npm%3A1.17.0#builtin<compat/resolve>::version=1.17.0&hash=3388aa"
+  dependencies:
+    path-parse: ^1.0.6
+  checksum: 99df12ab341fb8e96c6bce2ea521d3a1294c5c56f85524369808f7294fbf6f01d6f6c7f4408a1f6cd4fb5762b800a889629ff64abc08f12bcc8c3553e3564ab8
   languageName: node
   linkType: hard
 
@@ -1017,10 +1042,11 @@ __metadata:
     "@types/node": ^14.0.13
     eslint: ^7.3.0
     ts-node: ^8.10.2
+    ttypescript: ^1.5.10
     typescript: ^3.9.5
     typescript-language-server: ^0.4.0
   bin:
-    generate-mocks: ./scripts/generate-mocks.ts
+    generate-mocks: ./bin/generate-mocks.js
   languageName: unknown
   linkType: soft
 
@@ -1041,6 +1067,21 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: cd6e023e073d65ea346cf4a5b70bfd1e7c7f342c967a23a83038fd3462067558a4dda4fc8b238e6709db69aca3847590a93b4c52ae001e23ed9fef3b4fecbc71
+  languageName: node
+  linkType: hard
+
+"ttypescript@npm:^1.5.10":
+  version: 1.5.10
+  resolution: "ttypescript@npm:1.5.10"
+  dependencies:
+    resolve: ^1.9.0
+  peerDependencies:
+    ts-node: ^8.0.2
+    typescript: ^3.2.2
+  bin:
+    ttsc: ./bin/tsc
+    ttsserver: ./bin/tsserver
+  checksum: b21a1ce14fc5334e41fb0a2238e5803799e460b5144172b3f346080538b7676c4e2618b21bd414c37a75c3cb57ec152b7a75231a4eb171e285dc905aa37cfbf9
   languageName: node
   linkType: hard
 

@@ -4,7 +4,7 @@
   "author": "martinjlowm",
   "license": "MIT",
   "bin": {
-    "generate-mocks": "./scripts/generate-mocks.ts"
+    "generate-mocks": "./bin/generate-mocks.js"
   },
   "devDependencies": {
     "@types/node": "^14.0.13",
@@ -13,6 +13,7 @@
     "typescript-language-server": "^0.4.0"
   },
   "dependencies": {
-    "ts-node": "^8.10.2"
+    "ts-node": "^8.10.2",
+    "ttypescript": "^1.5.10"
   }
 }

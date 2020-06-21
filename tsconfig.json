@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "strictNullChecks": true,
+    "downlevelIteration": true,
     "types": ["node"]
   }
 }
