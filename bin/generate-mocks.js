@@ -1,9 +1,9 @@
-const child_process = require('child_process');
+const childProcess = require('child_process');
 
 const [,, ...fileArguments] = process.argv;
 
 try {
-  child_process.execFileSync(
+  childProcess.execFileSync(
     'node',
     [
       `${__dirname}/../scripts/generate-mocks.ts`,
