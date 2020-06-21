@@ -1,7 +1,16 @@
 {
   "compilerOptions": {
-    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": ".",
     "downlevelIteration": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "$/*": ["test/*"]
+    },
+    "strict": true,
+    "strictNullChecks": true,
     "types": ["node"]
   }
 }
