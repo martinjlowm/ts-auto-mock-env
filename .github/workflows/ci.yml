@@ -22,9 +22,14 @@ jobs:
         run: |
           yarn
 
-      - name: 'Type check'
+      - name: 'Assert generated environment (global) mocks'
         run: |
-          yarn tsc
+          yarn test
+
+      - name: 'Build'
+        run: |
+          yarn dist:build
+          yarn dist:collect
 
       - name: 'Assert generated environment (global) mocks'
         run: |
