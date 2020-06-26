@@ -8,6 +8,8 @@
 # typescript-language-server
 .log
 
-# Bare JS files, except for executables
+# Distribution
+dist
+
+# Any JS files
 *.js
-!dist/**/*.js
