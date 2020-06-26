@@ -1,6 +1,6 @@
 {
   "name": "ts-auto-mock-env",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "martinjlowm <martin@martinjlowm.dk>",
   "license": "MIT",
   "bin": {
