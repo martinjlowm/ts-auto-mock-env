@@ -26,7 +26,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn tsc --noEmit"
+      "pre-commit": "yarn tsc --noEmit",
+      "pre-push": "yarn version check"
     }
   }
 }
