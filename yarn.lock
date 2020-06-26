@@ -1519,8 +1519,10 @@ resolve@^1.9.0:
     ttypescript: ^1.5.10
     typescript: ^3.9.5
     typescript-language-server: ^0.4.0
+  peerDependencies:
+    ts-auto-mock: "*"
   bin:
-    generate-mocks: ./dist/scripts/generate-mocks.js
+    generate-mocks: ./scripts/generate-mocks.js
   languageName: unknown
   linkType: soft
 
