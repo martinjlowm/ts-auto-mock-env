@@ -3,13 +3,11 @@
   "version": "0.0.0",
   "author": "martinjlowm <martin@martinjlowm.dk>",
   "license": "MIT",
-  "bin": {
-    "generate-mocks": "./scripts/generate-mocks.js"
-  },
+  "files": ["dist"],
   "scripts": {
     "test": "yarn ts-node --transpile-only ./scripts/generate-mocks.ts test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null",
-    "dist:build": "tsc --outDir dist",
-    "dist:collect": "cp package.json dist"
+    "build": "tsc --outDir dist",
+    "prepack": "yarn build"
   },
   "devDependencies": {
     "@types/node": "^14.0.13",
@@ -28,6 +26,11 @@
     "hooks": {
       "pre-commit": "yarn tsc --noEmit",
       "pre-push": "yarn version check"
+    }
+  },
+  "publishConfig": {
+    "bin": {
+      "generate-mocks": "./dist/scripts/generate-mocks.js"
     }
   }
 }

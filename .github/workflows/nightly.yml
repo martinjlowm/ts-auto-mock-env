@@ -1,0 +1,41 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
+
+jobs:
+  nightly:
+    name: 'Nightly release if there are changes'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 14.x LTS
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+          registry-url: https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Check for changes'
+        run: |
+          yarn version check
+
+      - name: 'Release'
+        if: ${{ success() && env.NPM_AUTH_TOKEN }}
+        run: |
+          yarn version apply
+
+          git config --global user.name 'Martin Jesper Low Madsen'
+          git config --global user.email 'martinjlowm@users.noreply.github.com'
+
+          git add commit -am "v$(jq -r '.version' package.json)"
+          git push origin
+
+          yarn npm publish
+
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
