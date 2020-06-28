@@ -29,7 +29,3 @@ jobs:
       - name: 'Build'
         run: |
           yarn build
-
-      - name: 'Assert generated environment (global) mocks'
-        run: |
-          yarn generate-mocks test/mocks/tsconfig.json
