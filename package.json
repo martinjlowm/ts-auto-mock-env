@@ -3,6 +3,11 @@
   "version": "1.0.1-1",
   "author": "martinjlowm <martin@martinjlowm.dk>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinjlowm/ts-auto-mock-env.git"
+  },
+  "homepage": "https://github.com/martinjlowm/ts-auto-mock-env#readme",
   "files": [
     "dist"
   ],
