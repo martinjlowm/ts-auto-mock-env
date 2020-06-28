@@ -10,6 +10,7 @@ option. This project may be used by,
 1. package maintainers to supply pre-generated mocks for a release,
 2. or an end-user to create mocks on-demand.
 
+
 ## Installation
 
 - Yarn:
@@ -21,6 +22,7 @@ yarn add -D ts-auto-mock-env
 ```
 npm i --save-dev ts-auto-mock-env
 ```
+
 
 ## Usage
 
@@ -40,12 +42,14 @@ defined by your `tsconfig.json`.
 For example, say you have a declaration set that injects into the global scope
 of Node.js:
 
+
 #### **`declaration.d.ts`**
 ```
 declare function globalFunction(): void;
 ```
 
 and a TypeScript config that references this file:
+
 
 #### **`tsconfig.json`**
 ```
