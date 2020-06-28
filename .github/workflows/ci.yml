@@ -28,8 +28,7 @@ jobs:
 
       - name: 'Build'
         run: |
-          yarn dist:build
-          yarn dist:collect
+          yarn build
 
       - name: 'Assert generated environment (global) mocks'
         run: |
