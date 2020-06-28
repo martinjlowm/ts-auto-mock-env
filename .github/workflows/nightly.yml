@@ -28,7 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          [ ${{ steps.getStatus.outputs.data.state }} = "success" ] && true || false
+          [ ${{ fromJson(steps.getStatus.outputs.data).state }} = "success" ] && true || false
 
 
   nightly:
