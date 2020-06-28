@@ -4,7 +4,7 @@
 
 This project supplies an executable script to generate runtime mocks (powered by
 [`ts-auto-mock`](https://github.com/Typescript-TDD/ts-auto-mock)) from
-TypeScript declarations as supplied from a `tsconfig.json` using the `types`
+TypeScript declarations as supplied in a `tsconfig.json`-file using the `types`
 option. This project may be used by,
 
 1. package maintainers to supply pre-generated mocks for a release,
