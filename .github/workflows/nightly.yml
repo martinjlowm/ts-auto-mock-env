@@ -15,12 +15,30 @@ jobs:
         run: |
           git log --since="$(date --date=yesterday)" | grep $GITHUB_SHA
 
+  isStable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: getStatus
+        with:
+          route: GET /repos/:repository/commits/:ref/status
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          [ ${{ steps.getStatus.outputs.data.state }} = "success" ] && true || false
+
+
   nightly:
     name: 'Nightly release'
     runs-on: ubuntu-latest
 
-    needs: changes
-    if: ${{ needs.changes.result == 'success' }}
+    needs:
+      - changes
+      - isStable
+
+    if: ${{ needs.changes.result == 'success' && needs.isStable.result == 'success' }}
 
     steps:
       - uses: actions/checkout@v2
