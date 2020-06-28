@@ -22,13 +22,17 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: getStatus
         with:
-          route: GET /repos/:repository/commits/:ref/status
+          route: GET /repos/:repository/commits/:ref/check-runs
+          mediaType: |
+            previews:
+              - antiope
           repository: ${{ github.repository }}
           ref: ${{ github.ref }}
+          check_name: 'Build, lint and type check'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          [ "${{ fromJson(steps.getStatus.outputs.data).state }}" = "success" ] && true || false
+          [ "${{ fromJson(steps.getStatus.outputs.data).check_runs[0].conclusion }}" = "success" ] && true || false
 
 
   nightly:
@@ -67,8 +71,7 @@ jobs:
           git commit -am "v$(jq -r '.version' package.json)"
           git push origin
 
-          echo "Publish"
-          # yarn npm publish
+          yarn npm publish
 
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
