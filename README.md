@@ -14,12 +14,12 @@ option. This project may be used by,
 
 - Yarn:
 ```
-yarn add -D ts-auto-mock-env@github:martinjlowm/ts-auto-mock-env
+yarn add -D ts-auto-mock-env
 ```
 
 - NPM:
 ```
-npm i --save-dev martinjlowm/ts-auto-mock-env
+npm i --save-dev ts-auto-mock-env
 ```
 
 ## Usage

@@ -22,10 +22,10 @@ jobs:
         run: |
           yarn
 
-      - name: 'Type check'
-        run: |
-          yarn tsc
-
       - name: 'Assert generated environment (global) mocks'
         run: |
-          yarn generate-mocks test/mocks/tsconfig.json
+          yarn test
+
+      - name: 'Build'
+        run: |
+          yarn build
