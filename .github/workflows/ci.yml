@@ -1,6 +1,11 @@
 name: Continuous Integration
 
-on: 'push'
+on:
+  push:
+    paths-ignore:
+      - '.github/workflows/nightly.yml'
+      - '.dir-locals.el'
+      - '.gitignore'
 
 jobs:
   ci:
