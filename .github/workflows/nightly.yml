@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: dev
 
       - name: Use Node.js 14.x LTS
         uses: actions/setup-node@v1
@@ -22,11 +24,13 @@ jobs:
 
       - name: 'Check for changes'
         run: |
-          yarn version check
+          yarn version check    # no exit code?
 
       - name: 'Release'
         if: ${{ success() && env.NPM_AUTH_TOKEN }}
         run: |
+          git checkout master
+
           yarn version apply
 
           git config --global user.name 'Martin Jesper Low Madsen'
