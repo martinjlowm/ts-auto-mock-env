@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "yarn ts-node --transpile-only ./scripts/generate-mocks.ts test/mocks/tsconfig.json && grep 'globalFunction' test/mocks/index.js >/dev/null",
+    "test": "yarn ts-node --transpile-only ./scripts/generate-mocks.ts test/mocks/tsconfig.json && grep 'importGlobalFunction' test/mocks/index.js >/dev/null && grep 'referenceGlobalFunction' test/mocks/index.js >/dev/null",
     "build": "tsc --outDir dist",
     "prepack": "yarn build"
   },

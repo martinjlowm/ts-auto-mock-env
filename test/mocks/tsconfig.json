@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "types": ["../declarations/global"]
+    "types": ["../declarations"]
   },
   "include": ["./*"]
 }

@@ -45,10 +45,8 @@ const visitor: (program: ts.Program) => ts.Visitor = (program) => {
     const globalThisType = checker.getTypeAtLocation(identifier);
 
     const declarationNames = checker.getPropertiesOfType(globalThisType)
-      .map((property) => property.valueDeclaration)
-      .filter((declaration) => {
-        return typePaths.some((path) => declaration?.getSourceFile().fileName.startsWith(path));
-      })
+      .map((property) => property.valueDeclaration as ts.Declaration | undefined)
+      .filter((declaration): declaration is ts.Declaration => !!(declaration && !declaration?.getSourceFile().hasNoDefaultLib))
       .filter((d): d is ts.FunctionLike | ts.VariableDeclaration  => ts.isFunctionLike(d) || ts.isVariableDeclaration(d))
       .map((d) => d.name)
       .filter((name): name is ts.Identifier => !!name && ts.isIdentifier(name));
@@ -83,6 +81,7 @@ function visitNodeAndChildren(node: ts.Node, context: ts.TransformationContext, 
 
 const transformer: (program: ts.Program) => ts.TransformerFactory<ts.SourceFile> = (program) => {
   const visitNode = visitor(program);
+
   return (context) => {
     return (file) => {
       return ts.visitNode(file, (node) => visitNodeAndChildren(node, context, visitNode));
